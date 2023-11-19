@@ -4,14 +4,13 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const TicketForm = () => {
-  const startingTicketData: TicketType = {
+  const startingTicketData = {
     title: '',
     description: '',
     priority: 1,
     progress: 0,
     status: 'not started',
     category: 'Hardware problem',
-    createdAt: new Date(),
   };
 
   const router = useRouter();
@@ -22,10 +21,13 @@ const TicketForm = () => {
   ) => {
     const value = e.target.value;
     const name = e.target.name;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === 'priority' ? Number(value) : value,
-    }));
+    setFormData(
+      (prev) =>
+        ({
+          ...prev,
+          [name]: name === 'priority' ? Number(value) : value,
+        } as TicketType)
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,7 +44,7 @@ const TicketForm = () => {
     router.push('/');
     router.refresh();
   };
-  const [formData, setFormData] = useState<TicketType>(startingTicketData);
+  const [formData, setFormData] = useState(startingTicketData);
 
   return (
     <div className="flex justify-center">

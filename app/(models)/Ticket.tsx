@@ -1,7 +1,10 @@
 import { TicketType } from '@/types/ticket.type';
 import mongoose, { Schema, Model } from 'mongoose';
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 mongoose.Promise = global.Promise;
 const ticketSchema = new Schema<TicketType>(
   {
