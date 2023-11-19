@@ -3,6 +3,7 @@ import PriorityDisplay from './PriorityDisplay';
 import ProgressDisplay from './ProgressDisplay';
 import StatusDiplay from './StatusDiplay';
 import { TicketType } from '../../types/ticket.type';
+import Link from 'next/link';
 interface TicketCardProps {
   id: number;
   key: number;
@@ -29,20 +30,24 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
         <PriorityDisplay priority={ticket.priority} />
         <Deleteblock id={ticket._id} />
       </div>
-      <h4>{ticket.title}</h4>
-      <hr className="h-px border-0 bg-page mb-2" />
-      <p className="whitespace-pre-wrap"> {ticket.description}</p>
-      <div className="flex-grow">
-        <div className="flex mt-2">
-          <div className="flex flex-col">
-            <p className="text-xs my-1">{formatTimestamp(ticket.createdAt)}</p>
-            <ProgressDisplay progress={ticket.progress} />
-          </div>
-          <div className="ml-auto flex items-end">
-            <StatusDiplay status={ticket.status} />
+      <Link href={`TicketPage/${ticket._id}`} style={{ display: 'content' }}>
+        <h4>{ticket.title}</h4>
+        <hr className="h-px border-0 bg-page mb-2" />
+        <p className="whitespace-pre-wrap"> {ticket.description}</p>
+        <div className="flex-grow">
+          <div className="flex mt-2">
+            <div className="flex flex-col">
+              <p className="text-xs my-1">
+                {formatTimestamp(ticket.createdAt)}
+              </p>
+              <ProgressDisplay progress={ticket.progress} />
+            </div>
+            <div className="ml-auto flex items-end">
+              <StatusDiplay status={ticket.status} />
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
