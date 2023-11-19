@@ -13,19 +13,32 @@ const TicketForm = () => {
     category: 'Hardware problem',
   };
 
+  const router = useRouter();
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const value = e.target.value;
     const name = e.target.name;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'priority' ? Number(value) : value,
     }));
   };
 
-  const handleSubmit = () => {
-    console.log('submited');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await fetch('/api/Tickets', {
+      method: 'POST',
+      body: JSON.stringify({ formData }),
+      headers: { 'content-type': 'application/json' },
+    });
+    if (!res.ok) {
+      throw new Error('Failed to create ticket.');
+    }
+    router.refresh();
+    router.push('/');
   };
   const [formData, setFormData] = useState<TicketType>(startingTicketData);
 
@@ -49,11 +62,11 @@ const TicketForm = () => {
 
         <label> Description</label>
         <textarea
-          id="Description"
-          name="Description"
+          id="description"
+          name="description"
           onChange={handleChange}
           required={true}
-          value={formData.title}
+          value={formData.description}
           rows={5}
         ></textarea>
 
@@ -96,6 +109,24 @@ const TicketForm = () => {
             value={3}
             checked={formData.priority == 3}
           ></input>
+          <label>4</label>
+          <input
+            id="priority-4"
+            name="priority"
+            type="radio"
+            onChange={handleChange}
+            value={3}
+            checked={formData.priority == 4}
+          ></input>
+          <label>5</label>
+          <input
+            id="priority-5"
+            name="priority"
+            type="radio"
+            onChange={handleChange}
+            value={5}
+            checked={formData.priority == 5}
+          ></input>
           <label>3</label>
         </div>
         <label>Progress</label>
@@ -110,16 +141,19 @@ const TicketForm = () => {
         ></input>
 
         <label>Status</label>
-        <select name="Status" value={formData.status} onChange={handleChange}>
-          <option value="status"> status</option>
-          <option value="status"> status</option>
-          <option value="status"> status</option>
-          <option value="status"> status</option>
+        <select name="status" onChange={handleChange}>
+          <option value="Not started"> Not started</option>
+          <option value="Started"> Started</option>
+          <option value="Done"> Done</option>
         </select>
+        <input
+          type="submit"
+          className="btn max-w-xs"
+          value={'create ticket'}
+        ></input>
       </form>
     </div>
   );
 };
 
 export default TicketForm;
-useRouter;

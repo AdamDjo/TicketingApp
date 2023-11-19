@@ -1,6 +1,6 @@
 import TicketForm from '@/app/(components)/TicketForm';
 
-const TicketPage = () => {
+const TicketPage = async () => {
   return <TicketForm />;
 };
 
