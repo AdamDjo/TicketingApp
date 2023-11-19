@@ -18,14 +18,14 @@ export async function POST(
     );
   }
 }
-/*get ticket*/
+
+/*get List of ticket*/
 
 export async function GET(): Promise<
   NextResponse<{ tickets: TicketType[] } | { message: string }>
 > {
   try {
     const tickets = await TicketModel.find();
-    // Utilisez map pour convertir chaque document en un objet de type TicketType
 
     return NextResponse.json({ tickets }, { status: 200 });
   } catch (error: any) {

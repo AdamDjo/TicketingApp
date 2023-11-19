@@ -1,7 +1,8 @@
 import { Document } from 'mongoose';
 
 // Type représentant les propriétés d'un document Ticket
-export interface TicketTypeInput extends Document {
+export interface TicketType extends Document {
+  _id: string;
   title: string;
   description: string;
   category: string;
@@ -10,4 +11,3 @@ export interface TicketTypeInput extends Document {
   status: string;
   createdAt: Date;
 }
-export type TicketType = Omit<TicketTypeInput, keyof Document>;

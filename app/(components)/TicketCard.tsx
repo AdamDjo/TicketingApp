@@ -27,7 +27,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
     <div className="flex flex-col bg-card hover:bg-card-hover rounded-md shadow-lg p-3 m-2">
       <div className="flex mb-3 justify-between">
         <PriorityDisplay priority={ticket.priority} />
-        <Deleteblock />
+        <Deleteblock id={ticket._id} />
       </div>
       <h4>{ticket.title}</h4>
       <hr className="h-px border-0 bg-page mb-2" />
