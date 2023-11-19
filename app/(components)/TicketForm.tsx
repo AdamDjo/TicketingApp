@@ -11,6 +11,7 @@ const TicketForm = () => {
     progress: 0,
     status: 'not started',
     category: 'Hardware problem',
+    createdAt: new Date(),
   };
 
   const router = useRouter();
@@ -37,8 +38,9 @@ const TicketForm = () => {
     if (!res.ok) {
       throw new Error('Failed to create ticket.');
     }
-    router.refresh();
+
     router.push('/');
+    router.refresh();
   };
   const [formData, setFormData] = useState<TicketType>(startingTicketData);
 

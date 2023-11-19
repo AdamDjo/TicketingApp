@@ -1,9 +1,12 @@
-const ProgressDisplay = () => {
+interface ProgressDisplayProps {
+  progress: number; // Utilisez un tableau de TicketType au lieu d'un seul ticket
+}
+const ProgressDisplay: React.FC<ProgressDisplayProps> = ({ progress }) => {
   return (
     <div className="w-full bg-gray-200 rounded-full h-2.5 ">
       <div
         className=" bg-blue-600 h-2.5 rounded-full"
-        style={{ width: '75%' }}
+        style={{ width: `${progress}%` }}
       ></div>
     </div>
   );

@@ -8,5 +8,6 @@ export interface TicketTypeInput extends Document {
   priority: number;
   progress: number;
   status: string;
+  createdAt: Date;
 }
 export type TicketType = Omit<TicketTypeInput, keyof Document>;
