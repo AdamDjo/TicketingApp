@@ -2,13 +2,13 @@ import TicketModel from '@/app/(models)/Ticket';
 import connectDB from '@/app/utils/db';
 import { TicketType } from '@/types/ticket.type';
 import { NextResponse } from 'next/server';
-// Connect to MongoDB
-connectDB();
+
 export async function DELETE(
   req: any,
   { params }: any
 ): Promise<NextResponse<{ message: string }>> {
   try {
+    await connectDB();
     const { id } = params;
     await TicketModel.findByIdAndDelete(id);
     return NextResponse.json({ message: 'Ticket Deleted' }, { status: 200 });
@@ -24,6 +24,7 @@ export async function GET(
   NextResponse<{ foundTicket: TicketType | null } | { message: string }>
 > {
   try {
+    await connectDB();
     const { id } = params;
     const foundTicket = await TicketModel.findOne({ _id: id });
     return NextResponse.json({ foundTicket }, { status: 200 });

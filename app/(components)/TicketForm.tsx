@@ -63,7 +63,7 @@ const TicketForm: React.FC<TicketProps> = ({ ticket }) => {
         throw new Error('Failed to create ticket.');
       }
     }
-    router.push('/');
+    router.push('/TicketPage');
     router.refresh();
   };
 
