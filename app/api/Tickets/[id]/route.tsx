@@ -8,6 +8,7 @@ export async function DELETE(
   { params }: any
 ): Promise<NextResponse<{ message: string }>> {
   try {
+    await connectDB();
     const { id } = params;
     await TicketModel.findByIdAndDelete(id);
     return NextResponse.json({ message: 'Ticket Deleted' }, { status: 200 });
@@ -23,6 +24,7 @@ export async function GET(
   NextResponse<{ foundTicket: TicketType | null } | { message: string }>
 > {
   try {
+    await connectDB();
     const { id } = params;
     const foundTicket = await TicketModel.findOne({ _id: id });
     return NextResponse.json({ foundTicket }, { status: 200 });

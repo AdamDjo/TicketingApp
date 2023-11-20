@@ -1,4 +1,5 @@
 import TicketModel from '@/app/(models)/Ticket';
+import connectDB from '@/app/utils/db';
 
 import { TicketType } from '@/types/ticket.type';
 
@@ -9,6 +10,7 @@ export async function POST(
   req: any
 ): Promise<NextResponse<{ message: string }>> {
   try {
+    await connectDB();
     const body = await req.json();
     const ticketData: TicketType = body.formData;
     await TicketModel.create(ticketData);
@@ -27,6 +29,7 @@ export async function GET(): Promise<
   NextResponse<{ tickets: TicketType[] } | { message: string }>
 > {
   try {
+    await connectDB();
     const tickets = await TicketModel.find();
 
     return NextResponse.json({ tickets }, { status: 200 });

@@ -1,8 +1,7 @@
 import mongoose, { Schema, Model } from 'mongoose';
 import connectDB from '../utils/db';
 import { UserType } from '@/types/user.types';
-// Connect to MongoDB
-connectDB();
+
 const userSchema = new Schema<UserType>(
   {
     name: String,
