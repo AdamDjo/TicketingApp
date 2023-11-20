@@ -2,8 +2,7 @@ import TicketModel from '@/app/(models)/Ticket';
 import connectDB from '@/app/utils/db';
 import { TicketType } from '@/types/ticket.type';
 import { NextResponse } from 'next/server';
-// Connect to MongoDB
-connectDB();
+
 export async function DELETE(
   req: any,
   { params }: any

@@ -1,12 +1,10 @@
 import TicketModel from '@/app/(models)/Ticket';
-import connectDB from '@/app/utils/db';
+
 import { TicketType } from '@/types/ticket.type';
 
 import { NextResponse } from 'next/server';
 /*create ticket*/
 
-// Connect to MongoDB
-connectDB();
 export async function POST(
   req: any
 ): Promise<NextResponse<{ message: string }>> {
