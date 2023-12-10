@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model } from 'mongoose';
-import connectDB from '../utils/db';
+import connectDB from '../../utils/db';
 import { UserType } from '@/types/user.types';
 
 const userSchema = new Schema<UserType>(

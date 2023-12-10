@@ -5,7 +5,7 @@ import Nav from './(components)/Nav';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { getServerSession } from 'next-auth';
-import AuthProvider from './utils/SessionProvider';
+import AuthProvider from '../utils/SessionProvider';
 
 config.autoAddCss = false;
 const inter = Inter({ subsets: ['latin'] });

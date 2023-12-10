@@ -1,14 +1,11 @@
-import NextAuth from 'next-auth';
-import { Account, User as AuthUser } from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
+
 import CredentialsProvider from 'next-auth/providers/credentials';
-import GithubProvider from 'next-auth/providers/github';
-
-import UserModel from '@/app/(models)/User';
-import connectDB from '@/app/utils/db';
+import connectDB from './db';
+import { UserType } from '@/types/user.types';
 import bcrypt from 'bcrypt';
-
-export const authOptions: any = {
-  // Configure one or more authentication providers
+import UserModel from '@/app/(models)/User';
+export const authOptions = {
   providers: [
     CredentialsProvider({
       id: 'credentials',
@@ -17,7 +14,7 @@ export const authOptions: any = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials: any) {
+      async authorize(credentials) {
         /*connecting logic*/
         await connectDB();
         try {
@@ -41,12 +38,10 @@ export const authOptions: any = {
     // ...add more providers here
   ],
   callbacks: {
-    async signIn({ user, account }: { user: AuthUser; account: Account }) {
+    async signIn({ user, account }) {
       if (account?.provider == 'credentials') {
         return true;
       }
     },
   },
 };
-export const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };

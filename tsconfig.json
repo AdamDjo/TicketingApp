@@ -29,7 +29,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/page.tsx",
-    "app/utils/db.ts"
+    "utils/db.ts",
+    "app/api/auth/[...nextauth]/route.js",
+    "utils/authOptions.js"
   ],
   "exclude": ["node_modules"]
 }

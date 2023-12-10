@@ -1,6 +1,6 @@
 import { TicketType } from '@/types/ticket.type';
 import mongoose, { Schema, Model } from 'mongoose';
-import connectDB from '../utils/db';
+import connectDB from '../../utils/db';
 
 const ticketSchema = new Schema<TicketType>(
   {

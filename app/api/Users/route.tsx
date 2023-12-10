@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { UserType } from '../../../types/user.types';
 import UserModel from '@/app/(models)/User';
 import bcrypt from 'bcrypt';
-import connectDB from '@/app/utils/db';
+import connectDB from '@/utils/db';
 
 //Create user
 export async function POST(req: any) {
